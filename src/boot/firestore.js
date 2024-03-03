@@ -13,7 +13,7 @@ var firebaseConfig = {
   messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.FIREBASE_APP_ID,
 };
-
+console.log(firebaseConfig);
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp); // auth object for the firebase
 
