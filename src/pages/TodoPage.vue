@@ -71,44 +71,10 @@ const fetchTodos = async () => {
   }
 };
 
-watch(prompt, (prompt) => {
-  console.log("prompt", prompt);
-  // fires on nested property mutations
-  // Note: `newValue` will be equal to `oldValue` here
-  // because they both point to the same object!
-});
+watch(prompt, (prompt) => {});
 
-// const saveTodo = async () => {
-//   try {
-//     const datas = {
-//       name: name.value,
-//       description: description.value,
-//       remind_date: Timestamp.fromDate(new Date(remind_date.value)),
-//     };
-
-//     console.log("datas", datas);
-//     // query to get all docs in 'countries' collection
-//     await addDoc(collection(firebaseDatabase, "todos"), datas)
-//       .then((docRef) => {
-//         console.log("Document written with ID: ", docRef.id);
-//         prompt.value = false;
-//         console.log("prompt", docRef);
-//       })
-//       .catch((error) => {
-//         console.error("Error adding document: ", error);
-//       });
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//   } finally {
-//     // Set loading to false after the fetch operation completes
-//   }
-// };
-
-// Call the fetchUsers function when the component is mounted
 onMounted(() => {
   fetchTodos();
-  console.log("prompt", prompt.value);
-  console.log("auth", auth);
 });
 </script>
 

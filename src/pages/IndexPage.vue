@@ -42,9 +42,8 @@ const fetchUsers = async () => {
   }
 };
 
-// Call the fetchUsers function when the component is mounted
 onMounted(() => {
-  fetchUsers();
+  fetchUsers(); // Call the fetchUsers function when the component is mounted
 });
 </script>
 
