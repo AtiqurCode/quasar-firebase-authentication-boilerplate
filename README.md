@@ -1,11 +1,12 @@
-# Authentication Login/Register boilplate using vuejs and firebase database (vuefire)
+# Authentication Login/Register boilerplate using vueJS and firebase database (vuefire)
 
-A Authentication Login/Register boilerplate using Vuejs and Firebase database (Vuefire).
+An Authentication Login/Register boilerplate using Vuejs and Firebase database (Vuefire).
 
-### Create firebase project
+### Create Firebase project
 
 Go to the: [Firebase Console](https://console.firebase.google.com/)
-Create a new project and get the firebase configuration.
+Create a new project and get the Firebase configuration. Here are the instructions on how you can create the project with a screenshot or you may find a blog/tutorial to create any project.
+What you need from the project is to get the Firebase config data to config with the project .env file
 
 ![Screenshot 1](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-1.png)
 ![Screenshot 2](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-2.png)
@@ -60,3 +61,7 @@ quasar build
 ### Customize the configuration
 
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+
+
+### Appreciate your contribution if you have time to push any code for this project
+Thanks for you time to use this project and also be happier if you could give some time to contribute to making it more functional
