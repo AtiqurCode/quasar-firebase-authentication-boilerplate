@@ -5,6 +5,7 @@ A Authentication Login/Register boilerplate using Vuejs and Firebase database (V
 ### Create firebase project
 
 Go to the: [Firebase Console](https://console.firebase.google.com/)
+Create a new project and get the firebase configuration.
 
 ## Install the dependencies
 
