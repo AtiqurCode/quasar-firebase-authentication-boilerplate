@@ -8,9 +8,6 @@ const routes = [
     ],
     meta: { auth: true },
   },
-  { path: "/create", component: () => import("pages/Create.vue") },
-  { path: "/edit/:id", component: () => import("pages/Edit.vue") },
-  { path: "/:id", component: () => import("pages/Details.vue") },
   {
     path: "/auth",
     component: () => import("layouts/AuthLayout.vue"),
