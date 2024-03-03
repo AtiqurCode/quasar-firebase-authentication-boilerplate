@@ -8,7 +8,7 @@ Go to the: [Firebase Console](https://console.firebase.google.com/)
 Create a new project and get the Firebase configuration. Here are the instructions on how you can create the project with a screenshot or you may find a blog/tutorial to create any project.
 What you need from the project is to get the Firebase config data to config with the project .env file
 
-![Screenshot 1](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-1.png)(https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-2.png)
+![Screenshot 1](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-1.png)
 ![Screenshot 2](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-2.png)
 ![Screenshot 3](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-3.png)
 ![Screenshot 4](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-4.png)
