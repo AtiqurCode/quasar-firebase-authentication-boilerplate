@@ -6,7 +6,7 @@ A Authentication Login/Register boilerplate using Vuejs and Firebase database (V
 
 Go to the: [Firebase Console](https://console.firebase.google.com/)
 Create a new project and get the firebase configuration.
-
+![Screenshot description](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-1.png)
 ## Install the dependencies
 
 ```bash
