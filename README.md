@@ -22,6 +22,27 @@ What you need from the project is to get the Firebase config data to config with
 ![Screenshot 13](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-13.png)
 ![Screenshot 14](https://raw.githubusercontent.com/AtiqurCode/quasar-firebase-authentication-boilerplate/master/public/screenshot/firebase-project-create-14.png)
 
+
+### Copy the .env.example file
+copy the file .env.example file as .env
+or run the command in the project terminal
+
+```
+cp .env.example .env
+```
+
+### Configure your Firebase project to this clone GitHub project
+```
+FIREBASE_API_KEY=''
+FIREBASE_AUTH_DOMAIN=''
+FIREBASE_PROJECT_ID=''
+FIREBASE_STORAGE_BUCKET=''
+FIREBASE_MESSAGING_SENDER_ID=''
+FIREBASE_APP_ID=''
+```
+
+setup all values in this key to worked with your firebase created project
+
 ## Install the dependencies
 
 ```bash
