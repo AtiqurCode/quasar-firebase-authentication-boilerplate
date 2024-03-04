@@ -17,14 +17,13 @@ import { getAuth } from "firebase/auth";
 var firebaseConfig = {
   apiKey: "AIzaSyDqv2y-GpipRQMHwKzYwLCN4CHS7csdbo0",
   authDomain: "fir-test-8b7e6.firebaseapp.com",
-  projectId: "fir-test-8b7e6.appspot.com",
+  projectId: "fir-test-8b7e6",
   storageBucket: "fir-test-8b7e6.appspot.com",
   messagingSenderId: "666600484295",
   appId: "1:666600484295:web:2818cf96b5daf2f81cfde2",
+  measurementId: "G-L1XY4BHVM7",
 };
-console.log(firebaseConfig);
-console.log("FIREBASE_API_KEY", process.env.FIREBASE_API_KEY);
-console.log("process_env", import.meta.env);
+
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp); // auth object for the firebase
 
