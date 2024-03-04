@@ -15,7 +15,7 @@ var firebaseConfig = {
 };
 console.log(firebaseConfig);
 console.log("FIREBASE_API_KEY", process.env.FIREBASE_API_KEY);
-console.log("process_env", process.env);
+console.log("process_env", import.meta.env.VITE_FIREBASE_API_KEY);
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp); // auth object for the firebase
 
