@@ -82,6 +82,7 @@ const closeDialog = () => {
 const saveTodo = async () => {
   try {
     const datas = {
+      id: Math.random().toString(36).substring(2, 35),
       name: name.value,
       description: description.value,
       remind_date: Timestamp.fromDate(new Date(remind_date.value)),
@@ -91,9 +92,7 @@ const saveTodo = async () => {
     // query to get all docs in 'countries' collection
     await addDoc(collection(firebaseDatabase, "todos"), datas)
       .then((docRef) => {
-        console.log("Document written with ID: ", docRef.id);
         prompt.value = false;
-        console.log("prompt", docRef);
       })
       .catch((error) => {
         console.error("Error adding document: ", error);

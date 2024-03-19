@@ -1,38 +1,34 @@
 <template>
-  <div class="q-pa-md row items-start q-gutter-md">
-    <q-page-container>
-      <q-page>
-        <p v-if="loading">Loading...</p>
+  <div class="q-pa-md column items-center">
+    <p v-if="loading">Loading...</p>
+    <q-card class="my-card q-mb-md" v-for="todo in todos" :key="todo.name">
+      <q-card-section vertical>
+        <div class="text-h5 q-mt-sm q-mb-xs">{{ todo.name }}</div>
+        <div class="text-caption text-grey">
+          {{ todo.description }}
+        </div>
+      </q-card-section>
 
-        <q-card
-          class="my-card"
-          v-for="todo in todos"
-          :key="todo.name"
-          flat
-          bordered
-        >
-          <q-card-section>
-            <div class="text-overline text-orange-9">
-              {{ todo.remind_date?.toDate().toLocaleDateString() }}
-            </div>
-            <div class="text-h5 q-mt-sm q-mb-xs">{{ todo.name }}</div>
-            <div class="text-caption text-grey">
-              {{ todo.description }}
-            </div>
-          </q-card-section>
-        </q-card>
-        <q-page-sticky position="bottom-right" :offset="[18, 18]">
-          <q-btn
-            fab
-            icon="add"
-            color="primary"
-            @click="$q.dialog({ component: TodoCreate })"
-          />
-        </q-page-sticky>
-        <!-- Add a button to open a dialog with a toolbar -->
-        <!-- <TodoCreate :promptValue="prompt" /> -->
-      </q-page>
-    </q-page-container>
+      <q-separator />
+
+      <q-card-actions>
+        <q-btn flat>
+          {{ todo.remind_date?.toDate().toLocaleDateString() }}
+        </q-btn>
+        <q-btn flat round icon="delete" />
+        <q-btn flat round icon="edit" />
+      </q-card-actions>
+    </q-card>
+    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+      <q-btn
+        fab
+        icon="add"
+        color="primary"
+        @click="$q.dialog({ component: TodoCreate })"
+      />
+    </q-page-sticky>
+    <!-- Add a button to open a dialog with a toolbar -->
+    <!-- <TodoCreate :promptValue="prompt" /> -->
   </div>
 </template>
 
@@ -81,5 +77,5 @@ onMounted(() => {
 <style lang="sass" scoped>
 .my-card
   width: 100%
-  max-width: 350px
+  max-width: 500px
 </style>
