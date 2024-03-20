@@ -67,7 +67,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineProps, defineEmits } from "vue";
 import { firebaseDatabase } from "/src/boot/firestore.js";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
@@ -80,8 +80,11 @@ const closeDialog = () => {
 };
 
 const props = defineProps({
-  todoList: Array, // Define the type of the prop as an array
+  todoList: Array,
+  text: String, // Define the type of the prop as an array
 });
+
+const emits = defineEmits(["update:todoList"]);
 
 const saveTodo = async () => {
   try {
@@ -92,11 +95,11 @@ const saveTodo = async () => {
       remind_date: Timestamp.fromDate(new Date(remind_date.value)),
     };
 
-    console.log("datas", datas);
     // query to get all docs in 'countries' collection
     await addDoc(collection(firebaseDatabase, "todos"), datas)
       .then((docRef) => {
-        console.log("Document written with ID: ", props);
+        emits["update:todoList"]([...props.todoList, datas]);
+
         prompt.value = false;
       })
       .catch((error) => {

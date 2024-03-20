@@ -25,7 +25,11 @@
         icon="add"
         color="primary"
         @click="
-          $q.dialog({ component: TodoCreate, props: { todoList: todos } })
+          $q.dialog({
+            component: TodoCreate,
+            componentProps: { todoList: todos, text: 'Create a new todo' },
+            onDialogEvent: handleTodoAdded, // Define a method to handle the emitted event
+          })
         "
       />
     </q-page-sticky>
@@ -108,6 +112,11 @@ const deleteTodo = async (productId) => {
     .catch((error) => {
       console.error("Error searching for documents:", error);
     });
+};
+
+const handleTodoAdded = (newTodo) => {
+  // Handle the emitted event here, for example, add the new todo to the list
+  todos.value.push(newTodo);
 };
 
 onMounted(() => {
