@@ -15,7 +15,7 @@
         <q-btn flat>
           {{ todo.remind_date?.toDate().toLocaleDateString() }}
         </q-btn>
-        <q-btn flat round icon="delete" />
+        <q-btn flat round icon="delete" @click="deleteTodo(todo.id)" />
         <q-btn flat round icon="edit" />
       </q-card-actions>
     </q-card>
@@ -24,7 +24,9 @@
         fab
         icon="add"
         color="primary"
-        @click="$q.dialog({ component: TodoCreate })"
+        @click="
+          $q.dialog({ component: TodoCreate, props: { todoList: todos } })
+        "
       />
     </q-page-sticky>
     <!-- Add a button to open a dialog with a toolbar -->
@@ -33,21 +35,26 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted } from "vue";
+import { useQuasar } from "quasar";
 import { firebaseDatabase, auth } from "/src/boot/firestore.js";
 import TodoCreate from "src/components/TodoCreate.vue";
 import {
   collection,
   getDocs,
   query,
-  addDoc,
-  Timestamp,
+  where,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 
 const todos = ref([]);
 const loading = ref(true);
-const prompt = ref(false);
+const $q = useQuasar();
 
+/**
+ * Fetch all todos from the database
+ */
 const fetchTodos = async () => {
   try {
     // query to get all docs in 'countries' collection
@@ -67,7 +74,41 @@ const fetchTodos = async () => {
   }
 };
 
-watch(prompt, (prompt) => {});
+/**
+ * Delete a todo from the database
+ * @param {string} productId - The unique id of the todo to delete
+ */
+const deleteTodo = async (productId) => {
+  await getDocs(
+    query(collection(firebaseDatabase, "todos"), where("id", "==", productId))
+  )
+    .then((querySnapshot) => {
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((docSnapshot) => {
+          const documentId = docSnapshot.id;
+          deleteDoc(doc(firebaseDatabase, "todos", documentId))
+            .then(() => {
+              $q.notify({
+                color: "red-5",
+                textColor: "white",
+                icon: "warning",
+                message: "Todo deleted successfully!",
+              });
+            })
+            .catch((error) => {
+              console.error("Error deleting document:", error);
+            });
+        });
+      } else {
+        console.log(
+          "No documents found with the specified unique field value."
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error searching for documents:", error);
+    });
+};
 
 onMounted(() => {
   fetchTodos();

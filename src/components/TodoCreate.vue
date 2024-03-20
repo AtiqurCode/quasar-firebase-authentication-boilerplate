@@ -79,6 +79,10 @@ const closeDialog = () => {
   isOpen.value = false;
 };
 
+const props = defineProps({
+  todoList: Array, // Define the type of the prop as an array
+});
+
 const saveTodo = async () => {
   try {
     const datas = {
@@ -92,6 +96,7 @@ const saveTodo = async () => {
     // query to get all docs in 'countries' collection
     await addDoc(collection(firebaseDatabase, "todos"), datas)
       .then((docRef) => {
+        console.log("Document written with ID: ", props);
         prompt.value = false;
       })
       .catch((error) => {
