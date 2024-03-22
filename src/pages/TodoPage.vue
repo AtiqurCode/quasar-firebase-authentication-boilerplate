@@ -16,7 +16,17 @@
           {{ todo.remind_date?.toDate().toLocaleDateString() }}
         </q-btn>
         <q-btn flat round icon="delete" @click="deleteTodo(todo.id)" />
-        <q-btn flat round icon="edit" />
+        <q-btn
+          flat
+          round
+          icon="edit"
+          @click="
+            $q.dialog({
+              component: TodoUpdate,
+              componentProps: { updateTodo: todo },
+            })
+          "
+        />
       </q-card-actions>
     </q-card>
     <q-page-sticky position="bottom-right" :offset="[18, 18]">
@@ -43,6 +53,7 @@ import { ref, onMounted } from "vue";
 import { useQuasar } from "quasar";
 import { firebaseDatabase, auth } from "/src/boot/firestore.js";
 import TodoCreate from "src/components/TodoCreate.vue";
+import TodoUpdate from "src/components/TodoUpdate.vue";
 import {
   collection,
   getDocs,
