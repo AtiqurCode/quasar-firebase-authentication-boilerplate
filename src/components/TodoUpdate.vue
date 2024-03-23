@@ -57,7 +57,7 @@
           <q-btn
             label="Update"
             type="submit"
-            @click.prevent="updateTodoData"
+            @click.prevent="updateTodoData(todo_id)"
             color="primary"
           />
         </q-card-actions>
@@ -69,12 +69,24 @@
 <script setup>
 import { ref, defineProps, onMounted } from "vue";
 import { firebaseDatabase } from "/src/boot/firestore.js";
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import {
+  collection,
+  Timestamp,
+  updateDoc,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { useQuasar } from "quasar";
 
 const name = ref("");
+const todo_id = ref(null);
 const description = ref("");
 const remind_date = ref("");
 const isOpen = ref(false);
+const $q = useQuasar();
 
 const closeDialog = () => {
   isOpen.value = false;
@@ -84,30 +96,43 @@ const props = defineProps({
   updateTodo: Object,
 });
 
-const updateTodoData = async () => {
-  // update functions need to change for make the update work
-  try {
-    const datas = {
-      name: name.value,
-      description: description.value,
-      remind_date: Timestamp.fromDate(new Date(remind_date.value)),
-    };
+const updateTodoData = async (todoId) => {
+  const updatedData = {
+    name: name.value,
+    description: description.value,
+    remind_date: Timestamp.fromDate(new Date(remind_date.value)),
+  };
+  await getDocs(
+    query(collection(firebaseDatabase, "todos"), where("id", "==", todoId))
+  )
+    .then((querySnapshot) => {
+      if (!querySnapshot.empty) {
+        querySnapshot.forEach((docSnapshot) => {
+          const documentId = docSnapshot.id;
+          updateDoc(doc(firebaseDatabase, "todos", documentId), updatedData)
+            .then(() => {
+              closeDialog();
 
-    // query to get all docs in 'countries' collection
-    await addDoc(collection(firebaseDatabase, "todos"), datas)
-      .then((docRef) => {
-        prompt.value = false;
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
-
-    closeDialog();
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  } finally {
-    // Set loading to false after the fetch operation completes
-  }
+              $q.notify({
+                color: "green-5",
+                textColor: "white",
+                type: "positive",
+                message: "Todo updated successfully!",
+              });
+            })
+            .catch((error) => {
+              console.error("Error deleting document:", error);
+            });
+        });
+      } else {
+        console.log(
+          "No documents found with the specified unique field value."
+        );
+      }
+    })
+    .catch((error) => {
+      console.error("Error searching for documents:", error);
+    });
 };
 
 const parseTimestamp = (timestamp) => {
@@ -124,7 +149,9 @@ const parseTimestamp = (timestamp) => {
   // Return the formatted date string
   return `${year}-${month}-${day} ${hours}:${minutes}`;
 };
+
 onMounted(() => {
+  todo_id.value = props.updateTodo.id;
   name.value = props.updateTodo.name;
   description.value = props.updateTodo.description;
   remind_date.value = parseTimestamp(props.updateTodo.remind_date.seconds);
