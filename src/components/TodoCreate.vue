@@ -1,6 +1,6 @@
 <template>
   <q-dialog v-model="isOpen" persistent>
-    <q-card style="min-width: 500px" class="q-pa-md">
+    <q-card class="q-pa-md my-card">
       <q-form class="q-gutter-md">
         <q-input
           filled
@@ -114,3 +114,10 @@ const saveTodo = async () => {
   }
 };
 </script>
+
+<style>
+.my-card {
+  width: 100%;
+  max-width: 500px;
+}
+</style>
